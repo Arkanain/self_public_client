@@ -1,0 +1,19 @@
+-#- if @article.errors.full_messages.any?
+-#  - @article.errors.full_messages.each do |error|
+-#    .error
+-#      = error
+
+%form{ ng_controller: 'ArticleFormCtrl' }
+  .form_field
+    %label
+      Title
+    %input{ type: 'text', ng_model: 'article.title' }
+
+    %label
+      Text
+    %textarea{ ui_tinymce: 'tinymceOptions', rows: 15, ng_model: 'article.text' }
+
+  .form_field
+    %input.button.success{ type: 'submit', value: 'Save Article', ng_click: 'submit(article)' }
+    %a.button.form_back.alert{ href: '#/articles' }
+      Back

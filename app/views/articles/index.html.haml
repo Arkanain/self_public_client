@@ -1,0 +1,41 @@
+#articles
+  %div{ ng_if: 'articles', ng_repeat: 'article in articles' }
+    .article_container
+      .article_title
+        {{article.title}}
+
+      .article_content
+        .article_text
+          %span{ ng_bind_html: 'article.text | limitTo : 400 : 0' }
+
+        .buttons
+          .action
+            %a.button.success{ ng_href: '#/articles/{{article.id}}' }
+              %i.fa.fa-search
+              %span.button_text
+                View
+
+          .action{ ng_if: 'article.can_write' }
+            %a.button.warning{ ng_href: '#/articles/{{article.id}}/edit' }
+              %i.fa.fa-pencil-square-o
+              %span.button_text
+                Edit
+
+          .action{ ng_if: 'article.can_write' }
+            %a.button.alert{ ng_really_message: 'Are you sure?', ng_really_click: 'delete($index)' }
+              %i.fa.fa-trash-o
+              %span.button_text
+                Delete
+
+    %hr
+
+-# Add check create possibility later
+.page_actions
+  .header
+    Page actions:
+
+  .add_article
+    %a.button{ ng_href: '#/articles/new' }
+      %i.fa.fa-plus
+      %span.button_text
+        Add Article
