@@ -1,0 +1,49 @@
+#users
+  %table{ ng_if: 'users' }
+    %thead
+      %tr
+        %th
+          First name
+        %th
+          Last name
+        %th
+          Email
+        %th
+          Actions
+
+    %tbody
+      %tr{ ng_repeat: 'user in users' }
+        %td.first_name
+          {{ user.first_name }}
+        %td.last_name
+          {{ user.last_name }}
+        %td.username
+          {{ user.email }}
+        %td.buttons
+          .action
+            %a.button.success{ ng_href: '#/users/{{ user.id }}' }
+              %i.fa.fa-search
+              %span.button_text
+                View
+
+          .action
+            %a.button.warning{ ng_href: '#/users/{{ user.id }}/edit' }
+              %i.fa.fa-pencil-square-o
+              %span.button_text
+                Edit
+
+          .action{ ng_if: 'current_user.id != user.id' }
+            %a.button.alert{ ng_really_message: 'Are you sure?', ng_really_click: 'delete($index)' }
+              %i.fa.fa-trash-o
+              %span.button_text
+                Delete
+
+.page_actions
+  .header
+    Page actions:
+
+  .add_user
+    %a.button{ ng_href: '#/users/new' }
+      %i.fa.fa-plus
+      %span.button_text
+        Add User

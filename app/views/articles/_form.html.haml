@@ -3,17 +3,17 @@
 -#    .error
 -#      = error
 
-%form{ ng_controller: 'ArticleFormCtrl' }
+%form{ name: 'articleForm', ng_controller: 'ArticleFormCtrl' }
   .form_field
     %label
       Title
-    %input{ type: 'text', ng_model: 'article.title' }
+    %input{ type: 'text', ng_model: 'article.title', ng_required: 'true' }
 
     %label
       Text
-    %textarea{ ui_tinymce: 'tinymceOptions', rows: 15, ng_model: 'article.text' }
+    %textarea{ ui_tinymce: 'tinymceOptions', rows: 15, ng_model: 'article.text', ng_required: 'true' }
 
   .form_field
-    %input.button.success{ type: 'submit', value: 'Save Article', ng_click: 'submit(article)' }
+    %input.button.success{ type: 'submit', value: 'Save Article', ng_click: 'submit(article)', ng_disabled: 'articleForm.$invalid' }
     %a.button.form_back.alert{ href: '#/articles' }
       Back

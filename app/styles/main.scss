@@ -31,6 +31,7 @@ p {
   width: 100%;
   background-color: #1481e3;
   float: left;
+  user-select: none;
 
   .container {
     margin: 10px 15px;
@@ -161,6 +162,10 @@ p {
       .form_field {
         .form_back {
           float: right;
+        }
+
+        .ng-pristine, .ng-invalid-required {
+          box-shadow: none;
         }
       }
 

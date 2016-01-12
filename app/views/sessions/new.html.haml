@@ -1,0 +1,16 @@
+#sessions
+  %h2
+    Log in
+
+  %form
+    .field
+      %label
+        Email
+      %input{ type: 'email', ng_model: 'user.email', autofocus: true }
+
+      %label
+        Password
+      %input{ type: 'password', ng_model: 'user.password', autocomplete: "off" }
+
+    .actions
+      %input.button{ type: 'submit', value: 'Log in', ng_click: 'sign_in(user)' }

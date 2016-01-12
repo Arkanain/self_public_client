@@ -6,15 +6,15 @@
   %span.extra ...
 
 .sign_out
-  -#%span
-  -#  {{user.email}}
-  -#
-  -#%a{href:'users/sign_out'}
-  -#  %i.fa.fa-sign-out
-  -#  %span.button_text
-  -#    Sign out
+  %span
+    {{ current_user.email }}
 
-  %a{ ng_href: 'users/sign_in' }
+  %a{ ng_click: 'sign_out()', ng_if: 'current_user' }
+    %i.fa.fa-sign-out
+    %span.button_text
+      Sign out
+
+  %a{ ng_href: '#/sign_in', ng_if: '!current_user' }
     %i.fa.fa-sign-in
     %span.button_text
       Sign in

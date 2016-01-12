@@ -1,0 +1,42 @@
+-#- if @user.errors.full_messages.any?
+-#  - @user.errors.full_messages.each do |error|
+-#    .error
+-#      = error
+
+%form{ name: 'userForm', ng_controller: 'UsersFormCtrl' }
+  .form_field
+    %label
+      First name
+    %input{ type: 'text', ng_model: 'user.first_name' }
+
+  .form_field
+    %label
+      Last name
+    %input{ type: 'text', ng_model: 'user.last_name' }
+
+  .form_field
+    %label
+      Email
+    %input{ type: 'email', ng_model: 'user.email', ng_required: 'true' }
+
+  .form_field
+    %label
+      Role
+    %select{ ng_model: 'user.role', ng_required: 'true', ng_options: 'role.value as role.name for role in roles' }
+      %option{ value: '' }
+        Select role
+
+  .form_field
+    %label
+      Password
+    %input{ type: 'password', ng_model: 'user.password', ng_required: '{{password_required}}' }
+
+  .form_field
+    %label
+      Password confirmation
+    %input{ type: 'password', ng_model: 'user.password_confirmation', ng_required: '{{password_required}}' }
+
+  .form_field
+    %input.button.success{ type: 'submit', value: 'Save User', ng_click: 'submit(user)', ng_disabled: 'userForm.$invalid' }
+    %a.button.form_back.alert{ href: '#/articles' }
+      Back

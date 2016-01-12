@@ -15,19 +15,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/articles.css">
+    <link rel="stylesheet" href="styles/users.css">
   </head>
-  <body ng-app="catawikiClientApp">
+  <body ng-app="catawikiClientApp" ng-controller="MainCtrl">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div id="header">
+    <div id="header" ng-if="authorized">
       <div class="container">
         <ng-include src="'views/header.html'"></ng-include>
       </div>
     </div>
 
-    <div id="page_content">
+    <div id="page_content" ng-if="authorized">
       <div id="main_menu">
         <ng-include src="'views/main_menu.html'"></ng-include>
       </div>
@@ -74,10 +75,18 @@
     <script src="scripts/routes.js"></script>
     <script src="scripts/models.js"></script>
 
-    <script src="scripts/controllers/dashboard.js"></script>
+    <!-- controllers -->
+    <script src="scripts/controllers/mainCtrl.js"></script>
+    <script src="scripts/controllers/aboutUsCtrl.js"></script>
     <script src="scripts/controllers/articlesCtrl.js"></script>
+    <script src="scripts/controllers/sessionCtrl.js"></script>
+    <script src="scripts/controllers/usersCtrl.js"></script>
 
+    <!-- directives -->
     <script src="scripts/directives/ng-really.js"></script>
+
+    <!-- filters -->
+    <script src="scripts/filters/truncate.js"></script>
     <!-- endbuild -->
 </body>
 </html>

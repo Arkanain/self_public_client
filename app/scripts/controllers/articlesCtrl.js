@@ -11,6 +11,10 @@ angular.module('catawikiClientApp')
     };
   }])
 
+  .controller('ArticlesNewCtrl', ['$scope', 'Article', function($scope, Article) {
+    $scope.article = new Article();
+  }])
+
   .controller('ArticlesShowCtrl', ['$scope', '$routeParams', 'Article', function($scope, $routeParams, Article) {
     $scope.article = Article.get({
       id: $routeParams.id
@@ -21,10 +25,6 @@ angular.module('catawikiClientApp')
     $scope.article = Article.get({
       id: $routeParams.id
     });
-  }])
-
-  .controller('ArticlesNewCtrl', ['$scope', 'Article', function($scope, Article) {
-    $scope.article = new Article();
   }])
 
   .controller('ArticleFormCtrl', ['$scope', '$location', function($scope, $location) {

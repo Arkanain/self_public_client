@@ -1,12 +1,12 @@
 %ul
-  %li
-    %a{ ng_href:'#/dashboard' }
-      Dashboard
-
-  %li
+  %li{ ng_if: 'current_user.role == "admin"' }
     %a{ ng_href:'#/users' }
       Users
 
   %li
     %a{ ng_href:'#/articles' }
       Articles
+
+  %li
+    %a{ ng_href:'#/about_us' }
+      About Us
