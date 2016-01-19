@@ -2,39 +2,45 @@
 
 angular.module('catawikiClientApp')
   .controller('ArticlesIndexCtrl', ['$scope', '$routeParams', 'Article', function($scope, $routeParams, Article){
-    $scope.articles = Article.query();
+    Article.getList().then(function(articles) {
+      $scope.articles = articles;
+    });
 
     $scope.delete = function(index) {
-      $scope.articles[index].$delete().then(function(response) {
+      $scope.articles[index].remove().then(function() {
         $scope.articles.splice(index, 1);
       });
     };
   }])
 
-  .controller('ArticlesNewCtrl', ['$scope', 'Article', function($scope, Article) {
-    $scope.article = new Article();
+  .controller('ArticlesNewCtrl', ['$scope', '$location', 'Article', function($scope, $location, Article) {
+    $scope.submit = function(article) {
+      Article.post(article).then(function() {
+        $location.url('/articles');
+      });
+    };
   }])
 
   .controller('ArticlesShowCtrl', ['$scope', '$routeParams', 'Article', function($scope, $routeParams, Article) {
-    $scope.article = Article.get({
-      id: $routeParams.id
+    Article.get($routeParams.id).then(function(article) {
+      $scope.article = article;
     });
   }])
 
   .controller('ArticlesEditCtrl', ['$scope', '$routeParams', '$location', 'Article', function($scope, $routeParams, $location, Article) {
-    $scope.article = Article.get({
-      id: $routeParams.id
+    Article.get($routeParams.id).then(function(article) {
+      $scope.article = article;
     });
-  }])
-
-  .controller('ArticleFormCtrl', ['$scope', '$location', function($scope, $location) {
-    $scope.tinymceOptions = {
-      menubar: false
-    };
 
     $scope.submit = function(article) {
-      article.$save().then(function(response) {
+      article.put().then(function() {
         $location.url('/articles');
       });
+    };
+  }])
+
+  .controller('ArticleFormCtrl', ['$scope', function($scope) {
+    $scope.tinymceOptions = {
+      menubar: false
     };
   }]);

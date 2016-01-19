@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('catawikiClientApp')
-  .controller('AboutUsCtrl', function () {
+  .controller('AboutUsCtrl', ['$scope', function ($scope) {
 
-  });
+  }]);

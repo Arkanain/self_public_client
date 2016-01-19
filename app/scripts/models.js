@@ -1,22 +1,30 @@
 'use strict';
 
 angular.module('catawikiClientApp')
-  .factory('Session', ['Resource', '$cookies', function($resource, $cookies) {
-    return $resource('/api/sessions');
-  }])
+  .config(function(RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api');
+  })
 
-  .factory('Article', ['Resource', '$cookies', function($resource, $cookies) {
-    return $resource('/api/articles/:id', {
-      auth_token: $cookies.get('auth_token'),
-      id: '@id'
+  .run(['Restangular', '$cookies', function(Restangular, $cookies){
+    Restangular.setDefaultRequestParams({
+      auth_token: $cookies.get('auth_token')
     });
   }])
 
-  .factory('User', ['Resource', '$cookies', function($resource, $cookies) {
-    return $resource('/api/users/:id', {
-      auth_token: $cookies.get('auth_token'),
-      id: '@id'
-    }, {
-      current_user: { method: 'GET', url: '/api/users/current_user' }
-    });
+  .factory('Session', ['Restangular', function(Restangular) {
+    return Restangular.all('sessions');
+  }])
+
+  .factory('Article', ['Restangular', function(Restangular) {
+    return Restangular.all('articles');
+  }])
+
+  .factory('User', ['Restangular', function(Restangular) {
+    var user = Restangular.all('users');
+
+    user.current_user = function() {
+      return user.customGET('current_user');
+    };
+
+    return user;
   }]);

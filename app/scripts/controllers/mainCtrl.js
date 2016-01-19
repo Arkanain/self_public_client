@@ -2,22 +2,20 @@
 
 angular.module('catawikiClientApp')
   .controller('MainCtrl', ['$scope', '$window', '$cookies', 'User', 'Session', function ($scope, $window, $cookies, User, Session) {
-    User.current_user().$promise.then(function(response) {
+    User.current_user().then(function(response) {
       $scope.current_user = response;
 
       if(response.role === 'admin' || response.role === 'writer') {
         $scope.can_write = true;
       }
-
-      $scope.authorized = true;
-    }, function(response) {
+    }).finally(function(){
       $scope.authorized = true;
     });
 
     $scope.sign_out = function() {
-      Session.delete({
+      Session.remove({
         auth_token: $cookies.get('auth_token')
-      }).$promise.then(function(response) {
+      }).then(function() {
         $window.location.hash = '#/articles';
         $window.location.reload();
 

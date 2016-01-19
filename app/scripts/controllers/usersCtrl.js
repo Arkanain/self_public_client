@@ -6,43 +6,50 @@ angular.module('catawikiClientApp')
       $location.url('/articles');
     }
 
-    $scope.users = User.query();
+    User.getList().then(function(users) {
+      $scope.users = users;
+    });
 
     $scope.delete = function(index) {
-      $scope.users[index].$delete().then(function(response) {
+      $scope.users[index].remove().then(function() {
         $scope.users.splice(index, 1);
       });
     };
   }])
 
-  .controller('UsersNewCtrl', ['$scope', 'User', function($scope, User) {
-    $scope.user = new User();
+  .controller('UsersNewCtrl', ['$scope', '$location', 'User', function($scope, $location, User) {
     $scope.password_required = 'true';
+
+    $scope.submit = function(user) {
+      User.post(user).then(function() {
+        $location.url('/users');
+      });
+    };
   }])
 
   .controller('UsersShowCtrl', ['$scope', '$routeParams', 'User', function($scope, $routeParams, User) {
-    $scope.user = User.get({
-      id: $routeParams.id
+    User.get($routeParams.id).then(function(user) {
+      $scope.user = user;
     });
   }])
 
   .controller('UsersEditCtrl', ['$scope', '$routeParams', '$location', 'User', function($scope, $routeParams, $location, User) {
-    $scope.user = User.get({
-      id: $routeParams.id
+    User.get($routeParams.id).then(function(user) {
+      $scope.user = user;
     });
 
     $scope.password_required = 'false';
+
+    $scope.submit = function(user) {
+      user.put().then(function() {
+        $location.url('/users');
+      });
+    };
   }])
 
-  .controller('UsersFormCtrl', ['$scope', '$location', function($scope, $location) {
+  .controller('UsersFormCtrl', ['$scope', function($scope) {
     $scope.roles = [
       { value: 'admin', name: 'Admin' },
       { value: 'writer', name: 'Writer'}
     ];
-
-    $scope.submit = function(user) {
-      user.$save().then(function(response) {
-        $location.url('/users');
-      });
-    };
   }]);

@@ -6,11 +6,10 @@ angular.module('catawikiClientApp')
       $location.url('/articles');
     }
 
-    $scope.user = { email: '', password: '' };
-
     $scope.sign_in = function(user) {
-      Session.save(user).$promise.then(function(response) {
-        $cookies.put('auth_token', response.auth_token);
+      Session.post(user).then(function(session) {
+        $cookies.put('auth_token', session.auth_token);
+
         $window.location.hash = '#/articles';
         $window.location.reload();
       });

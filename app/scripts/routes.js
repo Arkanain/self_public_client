@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('catawikiClientApp').config(function ($routeProvider) {
+angular.module('catawikiClientApp').config(function($routeProvider) {
   $routeProvider
     .when('/sign_in', {
       templateUrl: 'views/sessions/new.html',

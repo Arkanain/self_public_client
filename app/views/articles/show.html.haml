@@ -3,7 +3,37 @@
     .article_title
       {{ article.title }}
     .article_content
-      .article_text{ ng_bind_html: 'article.text | limitTo : 400 : 0' }
+      .show_article_text{ ng_bind_html: 'article.text' }
+
+    %hr{ ng_if: 'article.comments.length != 0' }
+
+    .comments{ ng_if: 'article.comments.length != 0', ng_controller: 'CommentIndexCtrl' }
+      .comment_header
+        Comments:
+      .comment_content{ ng_repeat: 'comment in article.comments' }
+        .comment_text{ ng_bind_html: 'comment.text' }
+
+        .comment_author
+          .title
+            Commented by:
+          .name
+            {{ comment.user.full_name }}
+
+        .comment_actions{ ng_if: 'comment.user.id == current_user.id' }
+          %a.button.alert{ ng_really_message: 'Are you sure?', ng_really_click: 'delete_comment($index)' }
+            %i.fa.fa-trash-o
+            %span.button_text
+              Delete
+
+        %hr
+
+    %hr{ ng_if: 'article.comments.length == 0' }
+
+    %form{ id: 'comment', name: 'commentForm', ng_controller: 'CommentFormCtrl', ng_if: 'article && can_write' }
+      .form_field
+        %textarea{ ui_tinymce: 'tinymceOptions', rows: 6, ng_model: 'comment.text', ng_required: 'true' }
+
+        %input.button.success{ type: 'submit', value: 'Add Comment', ng_click: 'submit_comment(comment)', ng_disabled: 'commentForm.$invalid' }
 
   %a.button.show_back.alert{ ng_href: '#/articles' }
     Back
