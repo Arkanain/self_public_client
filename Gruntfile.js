@@ -491,7 +491,7 @@ module.exports = function (grunt) {
       },
       pages: {
         options: {
-          remote: 'git@github.com:Arkanain/self_public.git',
+          remote: 'git@github.com:Arkanain/self_public_client.git',
           branch: 'gh-pages'
         }
       },
