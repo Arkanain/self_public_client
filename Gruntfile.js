@@ -492,7 +492,7 @@ module.exports = function (grunt) {
       pages: {
         options: {
           remote: 'git@github.com:Arkanain/self_public.git',
-          branch: 'master'
+          branch: 'gh-pages'
         }
       },
       heroku: {
@@ -570,4 +570,5 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-haml2html');
+  grunt.loadNpmTasks('grunt-build-control');
 };
