@@ -18,6 +18,7 @@ angular.module('catawikiClientApp')
   .controller('CommentIndexCtrl', ['$scope', function($scope) {
     $scope.delete_comment = function(index) {
       var comment = $scope.article.comments[index];
+
       $scope.article.one('comments', comment.id).remove().then(function() {
         $scope.article.comments.splice(index, 1);
       });
