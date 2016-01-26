@@ -544,7 +544,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'haml:dist,',
+    'haml:dist',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
