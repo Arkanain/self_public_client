@@ -90,10 +90,7 @@ module.exports = function (grunt) {
         {
           context: '/api',
           host: 'localhost',
-          port: 3000,
-          headers: {
-            'host': 'self-publisher.herokuapp.com'
-          }
+          port: 3000
         }
       ],
       livereload: {
