@@ -444,7 +444,24 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }]
+        }, {
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts/test/',
+          src: ['**'],
+          dest: '<%= yeoman.dist %>/scripts/themes/modern/'
+        }
+        //, {
+        //  expand: true,
+        //  cwd: 'bower_components/tinymce-dist/skins/',
+        //  src: ['**'],
+        //  dest: '<%= yeoman.dist %>/scripts/skins/'
+        //}, {
+        //  expand: true,
+        //  cwd: 'bower_components/tinymce-dist/plugins/link/',
+        //  src: ['**'],
+        //  dest: '<%= yeoman.dist %>/scripts/plugins/link/'
+        //}
+        ]
       },
       styles: {
         expand: true,
@@ -522,7 +539,8 @@ module.exports = function (grunt) {
     html2js: {
       options: {
         base: '<%= yeoman.temp %>',
-        useStrict: true
+        useStrict: true,
+        quoteChar: '\''
       },
       main: {
         src: ['<%= yeoman.temp %>/views/**/*.html'],
