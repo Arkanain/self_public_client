@@ -505,7 +505,6 @@ module.exports = function (grunt) {
         }
       },
       heroku: {
-        tasks: ['build'],
         options: {
           remote: 'git@heroku.com:self-publisher-client.git',
           branch: 'master',
@@ -522,7 +521,8 @@ module.exports = function (grunt) {
 
     html2js: {
       options: {
-        base: '<%= yeoman.temp %>'
+        base: '<%= yeoman.temp %>',
+        useStrict: true
       },
       main: {
         src: ['<%= yeoman.temp %>/views/**/*.html'],
