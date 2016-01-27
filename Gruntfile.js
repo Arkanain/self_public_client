@@ -181,12 +181,13 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
-            '<%= yeoman.dist %>/{,*/}*',
+            '<%= yeoman.dist %>/**/*',
             '!<%= yeoman.dist %>/.git{,*/}*',
             '!<%= yeoman.dist %>/package.json',
             '!<%= yeoman.dist %>/Procfile',
-            '!<%= yeoman.dist %>/server.js'//,
-            //'!<%= yeoman.dist %>/node_modules/*'
+            '!<%= yeoman.dist %>/server.js',
+            '!<%= yeoman.dist %>/node_modules',
+            '!<%= yeoman.dist %>/node_modules/**/*'
           ]
         }]
       },
@@ -504,6 +505,7 @@ module.exports = function (grunt) {
         }
       },
       heroku: {
+        tasks: ['build'],
         options: {
           remote: 'git@heroku.com:self-publisher-client.git',
           branch: 'master',
