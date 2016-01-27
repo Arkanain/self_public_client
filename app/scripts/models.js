@@ -2,7 +2,14 @@
 
 angular.module('catawikiClientApp')
   .config(function(RestangularProvider) {
-    RestangularProvider.setBaseUrl('/api');
+    var url = '/api';
+    var myHerokuApiUrl = 'http://self-publisher.herokuapp.com';
+
+    if(window.location.hostname !== 'localhost') {
+      url = myHerokuApiUrl + url;
+    }
+
+    RestangularProvider.setBaseUrl(url);
   })
 
   .run(['Restangular', '$cookies', function(Restangular, $cookies){
