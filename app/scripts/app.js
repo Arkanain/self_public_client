@@ -9,7 +9,6 @@ angular
     'ngSanitize',
     'ngTouch',
     'mm.foundation',
-    'ui.tinymce',
     'restangular',
     'templates-main'
-]);
+  ]);

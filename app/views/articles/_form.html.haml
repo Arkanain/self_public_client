@@ -3,7 +3,7 @@
 -#    .error
 -#      = error
 
-%form{ name: 'articleForm', ng_controller: 'ArticleFormCtrl' }
+%form{ name: 'articleForm' }
   .form_field
     %label
       Title
@@ -11,7 +11,7 @@
 
     %label
       Text
-    %textarea{ ui_tinymce: 'tinymceOptions', rows: 15, ng_model: 'article.text', ng_required: 'true' }
+    %textarea{ rows: 15, ng_model: 'article.text', ng_required: 'true' }
 
   .form_field
     %input.button.success{ type: 'submit', value: 'Save Article', ng_click: 'submit(article)', ng_disabled: 'articleForm.$invalid' }

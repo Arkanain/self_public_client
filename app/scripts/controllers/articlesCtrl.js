@@ -37,10 +37,4 @@ angular.module('catawikiClientApp')
         $location.url('/articles');
       });
     };
-  }])
-
-  .controller('ArticleFormCtrl', ['$scope', function($scope) {
-    $scope.tinymceOptions = {
-      menubar: false
-    };
   }]);
