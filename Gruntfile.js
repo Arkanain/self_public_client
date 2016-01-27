@@ -590,6 +590,12 @@ module.exports = function (grunt) {
     'build'
   ]);
 
+  grunt.registerTask('deploy', [
+    'build',
+    'buildcontrol:pages',
+    'buildcontrol:heroku'
+  ]);
+
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-haml2html');
   grunt.loadNpmTasks('grunt-build-control');
