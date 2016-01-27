@@ -61,6 +61,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      html2js: {
+        files: ['<%= yeoman.app %>/views/**/*.html'],
+        tasks: ['html2js']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -181,8 +185,8 @@ module.exports = function (grunt) {
             '!<%= yeoman.dist %>/.git{,*/}*',
             '!<%= yeoman.dist %>/package.json',
             '!<%= yeoman.dist %>/Procfile',
-            '!<%= yeoman.dist %>/server.js',
-            '!<%= yeoman.dist %>/node_modules/'
+            '!<%= yeoman.dist %>/server.js'//,
+            //'!<%= yeoman.dist %>/node_modules/*'
           ]
         }]
       },
@@ -512,6 +516,16 @@ module.exports = function (grunt) {
           branch: 'build'
         }
       }
+    },
+
+    html2js: {
+      options: {
+        base: '<%= yeoman.temp %>'
+      },
+      main: {
+        src: ['<%= yeoman.temp %>/views/**/*.html'],
+        dest: '<%= yeoman.app %>/scripts/templates.js'
+      }
     }
   });
 
@@ -528,6 +542,7 @@ module.exports = function (grunt) {
       'configureProxies:server',
       'postcss:server',
       'connect:livereload',
+      'html2js',
       'watch'
     ]);
   });
@@ -562,7 +577,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'html2js'
   ]);
 
   grunt.registerTask('default', [
@@ -575,4 +591,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-connect-proxy');
   grunt.loadNpmTasks('grunt-haml2html');
   grunt.loadNpmTasks('grunt-build-control');
+  grunt.loadNpmTasks('grunt-html2js');
 };

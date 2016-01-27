@@ -10,5 +10,6 @@ angular
     'ngTouch',
     'mm.foundation',
     'ui.tinymce',
-    'restangular'
+    'restangular',
+    'templates-main'
 ]);
