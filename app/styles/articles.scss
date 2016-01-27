@@ -22,6 +22,19 @@
       vertical-align: top;
     }
 
+    .author {
+      display: inline-block;
+      width: 100%;
+
+      .name {
+        float: left;
+      }
+
+      .created {
+        float: right;
+      }
+    }
+
     .buttons {
       display: inline-block;
       width: 10%;

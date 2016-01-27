@@ -30,9 +30,14 @@
       %hr
 
       .author
-        {{ article.user.full_name }}
-      .created
-        {{ article.created_at }}
+        .name
+          %b
+            Author:
+          {{ article.user.full_name }}
+        .created
+          %b
+            Written at:
+          {{ article.created_at }}
 
     %hr
 
